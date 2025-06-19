@@ -1,0 +1,106 @@
+<div class="container mx-auto px-4">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg p-8 mb-8">
+        <div class="max-w-2xl">
+            <h1 class="text-4xl font-bold mb-4">Bem-vindo ao MeuShop</h1>
+            <p class="text-xl mb-6">Descubra os melhores produtos com preços incríveis e qualidade garantida.</p>
+            <button
+                class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                Ver Ofertas
+            </button>
+        </div>
+    </section>
+
+    <!-- Filtros -->
+    <section class="mb-8">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+            <h2 class="text-2xl font-bold text-gray-900">Nossos Produtos</h2>
+            <div class="flex flex-wrap gap-4">
+                <select
+                    class="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <option>Todas as categorias</option>
+                    <option>Eletrônicos</option>
+                    <option>Roupas</option>
+                    <option>Casa e Jardim</option>
+                    <option>Esportes</option>
+                </select>
+                <select
+                    class="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <option>Ordenar por</option>
+                    <option>Menor preço</option>
+                    <option>Maior preço</option>
+                    <option>Mais vendidos</option>
+                    <option>Mais recentes</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- Grid de Produtos -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+        @for (product of mockProducts; track product.id) {
+        <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
+            <!-- Imagem do produto -->
+            <div class="aspect-square bg-gray-200 relative overflow-hidden">
+                <img [src]="product.image" [alt]="product.name"
+                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                <div class="absolute top-2 right-2">
+                    <span class="bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+                        -{{ product.discount }}%
+                    </span>
+                </div>
+            </div>
+
+            <!-- Informações do produto -->
+            <div class="p-4">
+                <h3 class="font-semibold text-gray-900 mb-2 line-clamp-2">{{ product.name }}</h3>
+                <div class="flex items-center mb-2">
+                    <div class="flex text-yellow-400">
+                        @for (star of [1,2,3,4,5]; track star) {
+                        <lucide-icon [img]="Star" class="w-4 h-4" [class.fill-current]="star <= product.rating"
+                            [class.text-gray-300]="star > product.rating">
+                        </lucide-icon>
+                        }
+                    </div>
+                    <span class="text-sm text-gray-600 ml-1">({{ product.reviews }})</span>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <div class="flex flex-col">
+                        <span class="text-sm text-gray-500 line-through" *ngIf="product.originalPrice">
+                            R$ {{ product.originalPrice | number:'1.2-2':'pt-BR' }}
+                        </span>
+                        <span class="text-lg font-bold text-blue-600">
+                            R$ {{ product.price | number:'1.2-2':'pt-BR' }}
+                        </span>
+                    </div>
+                    <button
+                        class="bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
+                        (click)="addToCart(product)">
+                        <lucide-icon [img]="ShoppingCart" class="w-4 h-4"></lucide-icon>
+                        Comprar
+                    </button>
+                </div>
+            </div>
+        </div>
+        }
+    </section>
+
+    <!-- Paginação -->
+    <section class="flex justify-center">
+        <nav class="flex space-x-2">
+            <button class="px-3 py-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                Anterior
+            </button>
+            @for (page of [1,2,3,4,5]; track page) {
+            <button class="px-3 py-2 rounded-lg transition-colors"
+                [class]="page === 1 ? 'bg-blue-600 text-white' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'">
+                {{ page }}
+            </button>
+            }
+            <button class="px-3 py-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                Próximo
+            </button>
+        </nav>
+    </section>
+</div>

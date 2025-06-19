@@ -1,0 +1,169 @@
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-6xl mx-auto">
+        <!-- Header da página -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Carrinho de Compras</h1>
+            <p class="text-gray-600">{{ cartItems.length }} {{ cartItems.length === 1 ? 'item' : 'itens' }} no seu
+                carrinho</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Lista de itens do carrinho -->
+            <div class="lg:col-span-2">
+                @if (cartItems.length === 0) {
+                <!-- Carrinho vazio -->
+                <div class="bg-white rounded-lg shadow-sm p-8 text-center">
+                    <lucide-icon [img]="ShoppingBag" class="mx-auto h-24 w-24 text-gray-400 mb-4"></lucide-icon>
+                    <h3 class="text-lg font-medium text-gray-900 mb-2">Seu carrinho está vazio</h3>
+                    <p class="text-gray-500 mb-6">Adicione alguns produtos incríveis ao seu carrinho!</p>
+                    <a routerLink="/"
+                        class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors inline-flex items-center gap-2">
+                        <lucide-icon [img]="ArrowLeft" class="w-4 h-4"></lucide-icon>
+                        Continuar Comprando
+                    </a>
+                </div>
+                } @else {
+                <!-- Lista de produtos -->
+                <div class="bg-white rounded-lg shadow-sm">
+                    @for (item of cartItems; track item.id) {
+                    <div class="p-6 border-b border-gray-200 last:border-b-0">
+                        <div class="flex items-center space-x-4">
+                            <!-- Imagem do produto -->
+                            <div class="flex-shrink-0">
+                                <img [src]="item.product.image" [alt]="item.product.name"
+                                    class="w-20 h-20 object-cover rounded-lg">
+                            </div>
+
+                            <!-- Informações do produto -->
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-lg font-medium text-gray-900 truncate">
+                                    {{ item.product.name }}
+                                </h3>
+                                <p class="text-sm text-gray-500 mt-1">{{ item.product.category }}</p>
+                                <div class="flex items-center mt-2">
+                                    @if (item.product.originalPrice && item.product.originalPrice > item.product.price)
+                                    {
+                                    <span class="text-sm text-gray-500 line-through mr-2">
+                                        R$ {{ item.product.originalPrice | number:'1.2-2' }}
+                                    </span>
+                                    }
+                                    <span class="text-lg font-bold text-blue-600">
+                                        R$ {{ item.product.price | number:'1.2-2' }}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Controles de quantidade -->
+                            <div class="flex items-center space-x-3">
+                                <div class="flex items-center border border-gray-300 rounded-lg">
+                                    <button (click)="updateQuantity(item, item.quantity - 1)"
+                                        class="p-2 hover:bg-gray-100 transition-colors" [disabled]="item.quantity <= 1">
+                                        <lucide-icon [img]="Minus" class="w-4 h-4"></lucide-icon>
+                                    </button>
+                                    <span class="px-4 py-2 text-center min-w-[3rem]">{{ item.quantity }}</span>
+                                    <button (click)="updateQuantity(item, item.quantity + 1)"
+                                        class="p-2 hover:bg-gray-100 transition-colors">
+                                        <lucide-icon [img]="Plus" class="w-4 h-4"></lucide-icon>
+                                    </button>
+                                </div>
+
+                                <!-- Preço total do item -->
+                                <div class="text-right min-w-[6rem]">
+                                    <div class="text-lg font-bold text-gray-900">
+                                        R$ {{ (item.product.price * item.quantity) | number:'1.2-2' }}
+                                    </div>
+                                </div>
+
+                                <!-- Botão remover -->
+                                <button (click)="removeItem(item)"
+                                    class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+                                    <lucide-icon [img]="Trash2" class="w-5 h-5"></lucide-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                </div>
+
+                <!-- Botões de ação -->
+                <div class="flex justify-between items-center mt-6">
+                    <a routerLink="/"
+                        class="text-blue-600 hover:text-blue-700 font-medium inline-flex items-center gap-2">
+                        <lucide-icon [img]="ArrowLeft" class="w-4 h-4"></lucide-icon>
+                        Continuar Comprando
+                    </a>
+                    <button (click)="clearCart()"
+                        class="text-red-600 hover:text-red-700 font-medium inline-flex items-center gap-2">
+                        <lucide-icon [img]="Trash2" class="w-4 h-4"></lucide-icon>
+                        Limpar Carrinho
+                    </button>
+                </div>
+                }
+            </div>
+
+            <!-- Resumo do pedido -->
+            @if (cartItems.length > 0) {
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-lg shadow-sm p-6 sticky top-4">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Resumo do Pedido</h3>
+
+                    <!-- Valores -->
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Subtotal</span>
+                            <span class="font-medium">R$ {{ subtotal | number:'1.2-2':'pt-BR' }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Frete</span>
+                            <span class="font-medium">
+                                @if (shipping === 0) {
+                                <span class="text-green-600">Grátis</span>
+                                } @else {
+                                R$ {{ shipping | number:'1.2-2':'pt-BR' }}
+                                }
+                            </span>
+                        </div>
+                        @if (discount > 0) {
+                        <div class="flex justify-between text-green-600">
+                            <span>Desconto</span>
+                            <span>-R$ {{ discount | number:'1.2-2':'pt-BR' }}</span>
+                        </div>
+                        }
+                        <hr class="my-4">
+                        <div class="flex justify-between text-lg font-bold">
+                            <span>Total</span>
+                            <span>R$ {{ total | number:'1.2-2':'pt-BR' }}</span>
+                        </div>
+                    </div>
+
+                    <!-- Código de desconto -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            Código de Desconto
+                        </label>
+                        <div class="flex space-x-2">
+                            <input type="text" #couponInput placeholder="Digite o código"
+                                class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <button (click)="applyCoupon(couponInput.value); couponInput.value = ''"
+                                class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors">
+                                Aplicar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Botão finalizar compra -->
+                    <button routerLink="/checkout"
+                        class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
+                        Finalizar Compra
+                    </button>
+
+                    <!-- Informações adicionais -->
+                    <div class="mt-4 text-sm text-gray-500 text-center">
+                        <p>Frete grátis para compras acima de R$ 100</p>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>
