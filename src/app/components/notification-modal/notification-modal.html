@@ -1,17 +1,81 @@
-<div *ngIf="show" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-    <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full flex flex-col items-center animate-fade-in">
-        <div class="flex flex-col items-center gap-2 mb-6">
-            <span class="text-4xl">🚧</span>
-            <h2 class="text-2xl font-bold text-blue-700 text-center">Projeto em Desenvolvimento</h2>
-            <p class="text-gray-500 text-center text-base leading-relaxed">
-                Olá! Este projeto está em constante evolução.<br>
-                Desenvolvido por <b>Jeferson Reis Almeida</b> usando <span class="font-medium text-red-600">Angular</span> e <span class="font-medium text-purple-600">Tailwind CSS</span>.<br>
-                Agradeço pela compreensão e paciência durante as melhorias.
+<div class="fixed top-4 right-4 z-50 flex flex-col gap-3 max-w-md w-full pointer-events-none">
+    @for (notification of notifications$ | async; track notification.id) {
+    <div @notificationAnimation
+        class="pointer-events-auto flex items-center p-4 rounded-xl shadow-lg border-l-4 overflow-hidden relative"
+        [ngClass]="{
+      'bg-green-50 border-green-500': notification.type === 'success',
+      'bg-red-50 border-red-500': notification.type === 'error',
+      'bg-blue-50 border-blue-500': notification.type === 'info',
+      'bg-amber-50 border-amber-500': notification.type === 'warning'
+    }">
+        <!-- Ícone conforme o tipo de notificação -->
+        <div class="flex-shrink-0 mr-3">
+            @switch (notification.type) {
+            @case ('success') {
+            <lucide-icon [img]="CheckCircle" class="w-6 h-6 text-green-500"></lucide-icon>
+            }
+            @case ('error') {
+            <lucide-icon [img]="XCircle" class="w-6 h-6 text-red-500"></lucide-icon>
+            }
+            @case ('warning') {
+            <lucide-icon [img]="AlertCircle" class="w-6 h-6 text-amber-500"></lucide-icon>
+            }
+            @default {
+            <lucide-icon [img]="Info" class="w-6 h-6 text-blue-500"></lucide-icon>
+            }
+            }
+        </div>
+
+        <!-- Mensagem da notificação -->
+        <div class="flex-1 mr-3">
+            <p [ngClass]="{
+          'text-green-800': notification.type === 'success',
+          'text-red-800': notification.type === 'error',
+          'text-blue-800': notification.type === 'info',
+          'text-amber-800': notification.type === 'warning'
+        }" class="font-medium">
+                {{ notification.message }}
             </p>
         </div>
-        <button (click)="fechar()"
+
+        <!-- Botão para fechar a notificação -->
+        <button class="p-1 rounded-full focus:outline-none focus:ring-2 hover:bg-black/5 transition-colors" [ngClass]="{
+        'focus:ring-green-500 text-green-500': notification.type === 'success',
+        'focus:ring-red-500 text-red-500': notification.type === 'error',
+        'focus:ring-blue-500 text-blue-500': notification.type === 'info',
+        'focus:ring-amber-500 text-amber-500': notification.type === 'warning'
+      }" (click)="removeNotification(notification.id)">
+            <lucide-icon [img]="X" class="w-5 h-5"></lucide-icon>
+        </button>
+
+        <!-- Barra de progresso para notificações com duração -->
+        @if (notification.duration && notification.duration > 0) {
+        <div class="absolute bottom-0 left-0 h-1 origin-left" [ngClass]="{
+        'bg-green-500': notification.type === 'success',
+        'bg-red-500': notification.type === 'error',
+        'bg-blue-500': notification.type === 'info',
+        'bg-amber-500': notification.type === 'warning'
+      }" [style.animation]="'progress-shrink ' + notification.duration + 'ms linear forwards'">
+        </div>
+        }
+    </div>
+    }
+</div>
+
+<!-- Demonstração: Modal de Boas-vindas -->
+<div *ngIf="false" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+    <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full flex flex-col items-center animate-fade-in">
+        <div class="flex flex-col items-center gap-2 mb-6">
+            <span class="text-4xl">👋</span>
+            <h2 class="text-2xl font-bold text-gray-900 text-center">Bem-vindo ao MeuShop</h2>
+            <p class="text-gray-600 text-center text-base leading-relaxed">
+                Olá! Este é um e-commerce moderno desenvolvido com Angular e Tailwind CSS.
+                Explore nossos produtos e aproveite a experiência de compra!
+            </p>
+        </div>
+        <button (click)="showWelcomeNotification()"
             class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-xl shadow-md hover:scale-105 transition-transform font-semibold focus:outline-none focus:ring-2 focus:ring-blue-400">
-            Fechar
+            Começar a explorar
         </button>
     </div>
 </div>

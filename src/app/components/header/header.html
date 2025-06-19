@@ -1,5 +1,6 @@
 <header
-    class="bg-white shadow-lg border-b border-gray-100 sticky top-0 z-50 backdrop-blur-md transition-all duration-500">
+    class="bg-white shadow-lg border-b border-gray-100 sticky top-0 z-50 backdrop-blur-md transition-all duration-500"
+    role="banner">
     <div class="container mx-auto px-4">
         <div class="flex items-center justify-between h-20">
             <!-- Logo -->
@@ -12,26 +13,26 @@
             </div>
 
             <!-- Navegação principal -->
-            <nav class="hidden md:flex items-center space-x-10 animate-slide-in">
+            <nav class="hidden md:flex items-center space-x-10 animate-slide-in" aria-label="Navegação principal">
                 <a routerLink="/"
                     class="text-gray-700 hover:text-blue-600 font-semibold transition-colors duration-200 relative group">
                     Produtos
                     <span
                         class="block h-0.5 bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
                 </a>
-                <a href="#"
+                <a routerLink="/categorias"
                     class="text-gray-700 hover:text-blue-600 font-semibold transition-colors duration-200 relative group">
                     Categorias
                     <span
                         class="block h-0.5 bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
                 </a>
-                <a href="#"
+                <a routerLink="/ofertas"
                     class="text-gray-700 hover:text-blue-600 font-semibold transition-colors duration-200 relative group">
                     Ofertas
                     <span
                         class="block h-0.5 bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
                 </a>
-                <a href="#"
+                <a routerLink="/contato"
                     class="text-gray-700 hover:text-blue-600 font-semibold transition-colors duration-200 relative group">
                     Contato
                     <span
@@ -42,10 +43,12 @@
             <!-- Ações do usuário -->
             <div class="flex items-center space-x-4 animate-fade-in">
                 <!-- Busca -->
-                <div class="hidden lg:flex items-center">
+                <div class="hidden lg:flex items-center" role="search">
                     <div class="relative">
-                        <input type="text" placeholder="Buscar produtos..."
-                            class="w-64 pl-10 pr-4 py-2 border border-gray-200 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm transition-all duration-300 hover:shadow-md">
+                        <label for="header-search" class="sr-only">Buscar produtos</label>
+                        <input id="header-search" type="text" placeholder="Buscar produtos..."
+                            class="w-64 pl-10 pr-4 py-2 border border-gray-200 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm transition-all duration-300 hover:shadow-md"
+                            aria-label="Buscar produtos">
                         <lucide-icon [img]="Search"
                             class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400"></lucide-icon>
                     </div>
@@ -53,18 +56,27 @@
 
                 <!-- Carrinho -->
                 <a routerLink="/cart"
-                    class="relative p-2 text-gray-700 hover:text-blue-600 transition-colors duration-200">
+                    class="relative p-2 text-gray-700 hover:text-blue-600 transition-colors duration-200"
+                    data-testid="cart-link">
                     <lucide-icon [img]="ShoppingCart" class="h-7 w-7 animate-bounce-once"></lucide-icon>
-                    <span
-                        class="absolute -top-1 -right-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center shadow-md animate-pop-in">
-                        {{ cartItemCount }}
-                    </span>
+                    <span></span>
                 </a>
 
                 <!-- Menu mobile -->
-                <button class="md:hidden p-2 text-gray-700 hover:text-blue-600 transition-colors duration-200">
+                <button class="md:hidden p-2 text-gray-700 hover:text-blue-600 transition-colors duration-200"
+                    aria-label="Abrir menu de navegação" aria-controls="mobile-menu" aria-expanded="false">
                     <lucide-icon [img]="Menu" class="h-7 w-7"></lucide-icon>
                 </button>
+                <!-- Menu mobile dropdown (exemplo, deve ser controlado via Angular) -->
+                <nav id="mobile-menu"
+                    class="md:hidden hidden flex-col space-y-4 bg-white shadow-lg p-4 absolute right-4 top-20 rounded-lg z-50"
+                    aria-label="Menu mobile">
+                    <a routerLink="/" class="block text-gray-700 hover:text-blue-600 font-semibold">Produtos</a>
+                    <a routerLink="/categorias"
+                        class="block text-gray-700 hover:text-blue-600 font-semibold">Categorias</a>
+                    <a routerLink="/ofertas" class="block text-gray-700 hover:text-blue-600 font-semibold">Ofertas</a>
+                    <a routerLink="/contato" class="block text-gray-700 hover:text-blue-600 font-semibold">Contato</a>
+                </nav>
             </div>
         </div>
     </div>
