@@ -4,10 +4,11 @@ import { Product } from '../../models/product.model';
 import { ProductService } from '../../services/product';
 import { CartService } from '../../services/cart';
 import { LucideAngularModule, Star, ShoppingCart } from 'lucide-angular';
+import { NotificationModalComponent } from '../notification-modal/notification-modal';
 
 @Component({
   selector: 'app-product-list',
-  imports: [CommonModule, LucideAngularModule],
+  imports: [CommonModule, LucideAngularModule, NotificationModalComponent],
   templateUrl: './product-list.html',
   styleUrl: './product-list.scss'
 })
