@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-checkout',
@@ -7,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrl: './checkout.scss'
 })
 export class Checkout {
+  constructor(private location: Location) {}
 
+  voltar() {
+    this.location.back();
+  }
 }
