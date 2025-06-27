@@ -1,70 +1,81 @@
-# MeuShop – E-commerce Moderno
+# MeuShop – E-commerce Moderno com Angular, Django REST, PostgreSQL e Docker
 
-Projeto enterprise-grade desenvolvido com Angular 15+, TypeScript, Tailwind CSS e arquitetura modular, focado em performance, escalabilidade e experiência de usuário excepcional.
+![Angular](https://img.shields.io/badge/Angular-^20.0.0-DD0031?logo=angular&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-^5.8.2-3178C6?logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-^4.1.10-38B2AC?logo=tailwind-css&logoColor=white)
+![Django REST](https://img.shields.io/badge/Django%20REST-API-092E20?logo=django&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Relational_DB-336791?logo=postgresql&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Container-2496ED?logo=docker&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
-## 🚀 Visão Geral
+---
 
-O **MeuShop** é um e-commerce moderno, otimizado para SEO, responsivo e acessível, com código limpo, testável e pronto para produção. O projeto segue padrões avançados de arquitetura Angular, integrações RESTful e design system baseado em Tailwind CSS. O backend é desenvolvido em **Python** utilizando **Django REST Framework**, com banco de dados **PostgreSQL**, deploy automatizado no **Render.com** e suporte a **Docker** para facilitar o desenvolvimento e a implantação.
+## 🛒 Sobre o Projeto
 
-## 🛠️ Tecnologias & Ferramentas
+O **MeuShop** é um e-commerce moderno, escalável e de alta performance, desenvolvido para simular a experiência completa de uma loja online. O sistema foi projetado para ser referência em arquitetura frontend Angular, integração com backend Python (Django REST Framework), banco de dados PostgreSQL e deploy profissional com Docker e Render.com.
+
+### 🎯 **Objetivo Principal**
+
+Oferecer uma plataforma de e-commerce didática, robusta e pronta para produção, demonstrando as melhores práticas de desenvolvimento web full stack, componentização, integração de APIs RESTful e automação de deploy.
+
+---
+
+## ✨ Funcionalidades
+
+- **Catálogo de Produtos:** Visualização, busca e filtragem de produtos.
+- **Carrinho de Compras:** Adição, remoção e atualização de itens.
+- **Checkout Simulado:** Processo de finalização de compra.
+- **Componentes Reutilizáveis:** UI consistente e responsiva.
+- **Notificações e Feedbacks:** UX aprimorada com modais e alertas.
+- **Integração com API REST:** Backend Django para dados dinâmicos.
+- **Autenticação (roadmap):** Cadastro e login de usuários.
+- **Admin (roadmap):** Painel para gestão de produtos e pedidos.
+
+---
+
+## 🛠️ Tecnologias Utilizadas
 
 - **Frontend:**
-
-  - **Angular 15+** (CLI, DI, Lazy Loading, Feature Modules)
-  - **TypeScript** (strict mode, interfaces robustas)
-  - **Tailwind CSS** (utility-first, design tokens)
-  - **SCSS** (BEM, ITCSS)
-  - **RxJS** (Observables, operadores avançados)
-  - **Jest/Jasmine** para testes unitários
-  - **Cypress/Protractor** para testes e2e
-  - **NgRx** (opcional para estados complexos)
-  - **Arquitetura modular** e separação de responsabilidades
-
+  - [Angular 20+](https://angular.dev/) (TypeScript, RxJS, DI, Lazy Loading)
+  - [Tailwind CSS](https://tailwindcss.com/) (utility-first)
+  - [Lucide Angular](https://lucide.dev/guide/packages/lucide-angular) (ícones)
 - **Backend:**
-  - **Python** (Django REST Framework)
-  - **API RESTful** seguindo padrões OpenAPI/Swagger
-  - **PostgreSQL** como banco de dados relacional
-  - **Hospedagem Backend:** [Render.com](https://render.com/)
-  - **Docker** para ambiente isolado e deploy simplificado
+  - [Python 3.12+](https://www.python.org/)
+  - [Django REST Framework](https://www.django-rest-framework.org/)
+  - [PostgreSQL](https://www.postgresql.org/)
+- **DevOps:**
+  - [Docker](https://www.docker.com/) (multi-stage build, NGINX)
+  - [Render.com](https://render.com/) (deploy backend)
+- **Testes:**
+  - [Jest/Jasmine](https://jestjs.io/) (unitários frontend)
+  - [Cypress](https://www.cypress.io/) (e2e)
+  - [Pytest](https://docs.pytest.org/) (backend)
 
-## 📁 Estrutura de Pastas
+---
 
+## 🚀 Como Rodar o Projeto Localmente
+
+### Pré-requisitos
+
+- Node.js 18+
+- Angular CLI 17+
+- Python 3.12+
+- Docker (opcional, recomendado para ambiente completo)
+
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/seu-usuario/meu-ecommerce.git
+cd meu-ecommerce
 ```
-src/
-  app/
-    components/         # Componentes atômicos e reutilizáveis
-    models/             # Interfaces e models TypeScript
-    services/           # Serviços, providers e integrações REST
-    ...
-  public/               # Assets públicos
-  styles.scss           # Estilos globais
-backend/
-  ...                   # Código Python (API REST - Django REST Framework)
-dockerfile              # Dockerfile para build e deploy
-```
 
-## 🏗️ Padrões e Boas Práticas
-
-- Modularização com lazy loading
-- Injeção de dependência otimizada
-- Componentização atômica
-- Responsividade mobile-first
-- Acessibilidade (WCAG 2.1 AA, ARIA, navegação por teclado)
-- SEO: meta tags dinâmicas, dados estruturados
-- Clean Code & SOLID
-- Testes automatizados (unitários e e2e)
-- Integração robusta entre Angular e API Python (Django REST Framework)
-- Segurança: autenticação, autorização e sanitização de dados
-
-## ⚙️ Como rodar o projeto
-
-### 1. Instale as dependências do frontend
+### 2. Instale as dependências do frontend
 
 ```bash
 npm install
 ```
 
-### 2. Ambiente de desenvolvimento frontend
+### 3. Execute o frontend
 
 ```bash
 npm start
@@ -72,90 +83,78 @@ npm start
 ng serve
 ```
 
-Acesse: http://localhost:4200/
+Acesse: [http://localhost:4200](http://localhost:4200)
 
-### 3. Instale as dependências do backend (Python)
+### 4. (Opcional) Rode o frontend com Docker
+
+```bash
+docker build -t meushop-frontend .
+docker run -p 4200:80 meushop-frontend
+```
+
+### 5. Backend (Django REST)
+
+- O backend está na pasta `backend/` (consulte README específico lá)
+- Exemplo de execução:
 
 ```bash
 cd backend
 pip install -r requirements.txt
-```
-
-### 4. Ambiente de desenvolvimento backend
-
-```bash
 python manage.py runserver
 ```
 
-Acesse: http://localhost:8000/ (ou porta configurada)
+---
 
-### 5. Banco de dados
+## 📁 Estrutura de Pastas
 
-- Configure o PostgreSQL localmente ou utilize serviço gerenciado
-- Defina as variáveis de ambiente de conexão no backend
-
-### 6. Deploy Backend
-
-- O backend é hospedado no [Render.com](https://render.com/)
-- Configure variáveis de ambiente e banco de dados PostgreSQL na plataforma
-
-### 7. Utilizando Docker
-
-Para rodar o projeto completo (frontend e backend) via Docker:
-
-```bash
-docker build -t meushop .
-docker run -p 4200:4200 -p 8000:8000 meushop
 ```
-
-> Certifique-se de configurar corretamente as variáveis de ambiente e volumes no Dockerfile e docker-compose.yml (se aplicável) para produção.
-
-## 🧪 Testes e Qualidade
-
-- Cobertura mínima recomendada: 80%
-- Testes unitários em todos os serviços e componentes críticos
-- Testes e2e para principais fluxos de usuário
-- Linting e formatação automatizados
-- Testes de API backend (pytest, unittest)
-
-## 📦 Deploy & CI/CD
-
-- Build otimizado para produção (bundle size, lazy loading)
-- Pronto para integração com pipelines CI/CD (GitHub Actions, Azure DevOps, etc)
-- Backend deploy automático no Render.com
-- Considerações de SSR e SEO para produção
-- Suporte a deploy via Docker
-
-## 🤝 Contribuição
-
-1. Faça um fork do projeto
-2. Crie uma branch (`feature/nome-da-feature`)
-3. Commit e push com mensagens descritivas
-4. Abra um Pull Request detalhado
-5. Siga os padrões de código e arquitetura do projeto
-
-## 📝 Critérios de Qualidade
-
-- Código limpo, modular e documentado
-- Performance otimizada (OnPush, trackBy, lazy loading)
-- Segurança: sanitização de inputs, validação, HTTPS
-- Acessibilidade e responsividade garantidas
-- Manutenibilidade e escalabilidade
-
-## 📚 Referências
-
-- [Angular CLI Docs](https://angular.dev/tools/cli)
-- [Tailwind CSS Docs](https://tailwindcss.com/docs)
-- [RxJS Docs](https://rxjs.dev/guide/overview)
-- [Django REST Framework](https://www.django-rest-framework.org/)
-- [Render.com Docs](https://render.com/docs)
-- [PostgreSQL Docs](https://www.postgresql.org/docs/)
-- [Docker Docs](https://docs.docker.com/)
-
-## 📄 Licença
-
-MIT
+meu-ecommerce/
+├── src/
+│   ├── app/
+│   │   ├── components/     # Componentes da aplicação
+│   │   ├── models/         # Modelos e interfaces TypeScript
+│   │   ├── services/       # Serviços (lógica de negócio)
+│   │   └── ...
+│   ├── public/             # Assets públicos
+│   ├── styles.scss         # Estilos globais
+│   └── main.ts             # Entry point
+├── backend/                # Backend Django REST Framework
+├── dockerfile              # Dockerfile do frontend
+├── angular.json            # Configuração Angular
+├── package.json            # Dependências e scripts
+└── tailwind.config.js      # Configuração Tailwind CSS
+```
 
 ---
 
-**MeuShop** – Código enterprise-grade, UX excepcional e arquitetura escalável para crescimento sustentável.
+## 💡 Diferenciais Técnicos
+
+- Arquitetura modular e escalável
+- Componentização e reuso extremo
+- Responsividade e acessibilidade (WCAG 2.1 AA)
+- SEO-friendly e performance otimizada
+- Integração real com API RESTful
+- Pronto para CI/CD e deploy em cloud
+- Código limpo, testável e documentado
+
+---
+
+## 🤝 Contribuição
+
+Contribuições são bem-vindas! Siga os passos:
+
+1. Faça um fork do projeto.
+2. Crie uma branch (`git checkout -b feature/sua-feature`).
+3. Commit (`git commit -m 'feat: sua feature'`).
+4. Push (`git push origin feature/sua-feature`).
+5. Abra um Pull Request.
+
+---
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+---
+
+> Feito com ❤️ por Jeff e colaboradores. Sinta-se à vontade para explorar, sugerir melhorias e contribuir!
